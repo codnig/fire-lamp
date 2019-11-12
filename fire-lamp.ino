@@ -39,21 +39,16 @@ void loop() {
 	val = digitalRead(inputPin);  
 	// 만약 값이 HIGH 일때,
     int gas = analogRead(gasPin);
-	if (!val) {            
+	if (!val || gas >= 30) {            
+		Serial.println("FIRE!!");
 		buzzer();
+		red();
 
 	} else {
-
+		Serial.println("NOMAL");
+		white();
+		delay(1000);
 	}
-
-    int i;    
-    uint32_t colorValue;
-    colorValue = neo.Color(255, 0, 0, 0); //color : red
-    for(i = 0; i < NUM_LEDS; i++) {
-        neo.setPixelColor(i, colorValue);
-        neo.show();
-        delay(50);
-    }
 }
 
 // 경보음을 만들어 냅니다.
